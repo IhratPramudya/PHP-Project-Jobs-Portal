@@ -1,5 +1,6 @@
 <?php
 
+use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Route;
 
 Route::get('/', function () {
@@ -10,18 +11,19 @@ Route::get('/jobs', function () {
     return '<h1>Available Jobs</h1>';
 })->name('jobs');
 
-Route::any('/submit', function () {
-    return 'Submitted';
-});
-
-Route::get('/test', function () {
-    $url = route('jobs');
-    return "<a href=''>Click Here</a>";
-});
-
-Route::get('/api/users', function () {
+Route::get('/test', function (Request $request) {
     return [
-        'name' => 'John Doe',
-        'email' => 'john@gmail.com'
+        'method' => $request->method(),
+        'url' => $request->url(),
+        'path' => $request->path(),
+        'fullurl' => $request->fullUrl(),
+        'ip' => $request->ip(),
+        'userAgent' => $request->userAgent(),
+        'header' => $request->header()
     ];
+});
+
+
+Route::get('/users', function (Request $request) {
+    return $request->input('name', 'Default Input');
 });
