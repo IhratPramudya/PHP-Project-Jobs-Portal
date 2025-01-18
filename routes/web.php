@@ -1,6 +1,7 @@
 <?php
 
 use Illuminate\Http\Request;
+use Illuminate\Http\Response;
 use Illuminate\Support\Facades\Route;
 
 Route::get('/', function () {
@@ -11,19 +12,14 @@ Route::get('/jobs', function () {
     return '<h1>Available Jobs</h1>';
 })->name('jobs');
 
-Route::get('/test', function (Request $request) {
-    return [
-        'method' => $request->method(),
-        'url' => $request->url(),
-        'path' => $request->path(),
-        'fullurl' => $request->fullUrl(),
-        'ip' => $request->ip(),
-        'userAgent' => $request->userAgent(),
-        'header' => $request->header()
-    ];
+Route::get('/test', function () {
+    return response('Hello World', 200);
 });
 
+Route::get('/error', function () {
+    return response('Page Not Found', 404);
+});
 
-Route::get('/users', function (Request $request) {
-    return $request->input('name', 'Default Input');
+Route::get('/notfound', function () {
+    return new Response('Page Not Found', 404);
 });
