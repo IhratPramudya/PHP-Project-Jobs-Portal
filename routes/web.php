@@ -13,13 +13,5 @@ Route::get('/jobs', function () {
 })->name('jobs');
 
 Route::get('/test', function () {
-    return response('Hello World', 200);
-});
-
-Route::get('/error', function () {
-    return response('Page Not Found', 404);
-});
-
-Route::get('/notfound', function () {
-    return new Response('Page Not Found', 404);
+    return response('<h1>Hello World</h1>', 200)->header('Content-Type', 'text/html');
 });
