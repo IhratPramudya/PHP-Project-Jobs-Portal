@@ -13,5 +13,15 @@ Route::get('/jobs', function () {
 })->name('jobs');
 
 Route::get('/test', function () {
-    return response('<h1>Hello World</h1>', 200)->header('Content-Type', 'text/html');
+    return response()->json(['name' => 'John Doe'])->cookie('name', 'John Doe');
+});
+
+
+Route::get('/download', function () {
+    return response()->download(public_path('favicon.ico'));
+});
+
+Route::get('/read-cookie', function (Request $request) {
+    $cookieValue = $request->cookie('name');
+    return response()->json(['cookie' => $cookieValue]);
 });
